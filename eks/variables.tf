@@ -1,0 +1,38 @@
+variable "region" {}
+variable "aws_access_key" {}
+variable "aws_secret_key" {}
+variable "name" {}
+variable "backend_bucket_key" {
+  description = "a bucket key with tf state"
+  default = "eks/terraform.tfstate"
+}
+
+variable "environment" {}
+
+variable "availability_zones" {
+  description = "a comma-separated list of availability zones, defaults to all AZ of the region, if set to something other than the defaults, both private_subnets and public_subnets have to be defined as well"
+  default = ["us-east-1a", "us-east-1b"]
+}
+
+variable "cidr" {
+  description = "The CIDR block for the VPC."
+  default     = "10.0.0.0/16"
+}
+
+variable "private_subnets" {
+  description = "a list of CIDRs for private subnets in your VPC, must be set if the cidr variable is defined, needs to have as many elements as there are availability zones"
+  default     = ["10.0.0.0/20", "10.0.32.0/20"]
+}
+
+variable "public_subnets" {
+  description = "a list of CIDRs for public subnets in your VPC, must be set if the cidr variable is defined, needs to have as many elements as there are availability zones"
+  default     = ["10.0.16.0/20", "10.0.48.0/20"]
+}
+
+variable "kubeconfig_path" {
+  description = "Path where the config file for kubectl should be written to"
+  default     = "~/.kube"
+}
+
+variable "vpc_id" {}
+
